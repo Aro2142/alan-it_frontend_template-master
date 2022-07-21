@@ -6,7 +6,7 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 const Graph = () => {
 
-  return <p>Здесь должны быть графики</p>
+  return <p>1Здесь должны быть графики</p>
   var root = am5.Root.new("chartdiv");
 
 
