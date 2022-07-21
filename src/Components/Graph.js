@@ -1,12 +1,11 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import {useState, useEffect, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 
 
 
 am4core.useTheme(am4themes_animated);
-
 const Graph = ({data}) => {
 const chart = useRef(null);
     useEffect(() => {
@@ -29,7 +28,7 @@ const chart = useRef(null);
  else finaldata[finaldata.length - 1].sales += item.sales;
  })
 
- console.log(data)
+ //console.log(data)
 
  x.data = finaldata;
  let dateAxis = x.xAxes.push(new am4charts.DateAxis());
@@ -52,4 +51,5 @@ const chart = useRef(null);
 }, []);
   return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
 }
+//setTimeout(Graph, 4 * 1000);
 export default Graph
