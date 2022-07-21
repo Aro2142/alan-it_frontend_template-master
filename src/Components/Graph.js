@@ -1,123 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
-import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-
-
-const Graph = () => {
-
-  return <p>1Здесь должны быть графики</p>
-  var root = am5.Root.new("chartdiv");
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import React, {useState, useEffect, useRef} from 'react'
 
 
 
-root.setThemes([
-  am5themes_Animated.new(root)
-]);
+am4core.useTheme(am4themes_animated);
 
-var chart = root.container.children.push(am5xy.XYChart.new(root, {
-  panX: true,
-  panY: true,
-  wheelX: "panX",
-  wheelY: "zoomX",
-  pinchZoomX:true
-}));
+const Graph = (props) =>{
+const chart = useRef(null);
+    useEffect(() => {
+      console.log(props)
+//       if (data.length === 0){
+//         return 
+//       }
 
-var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-cursor.lineY.set("visible", false);
+      
+// let x = am4core.create("chartdiv", am4charts.XYChart);
+// x.paddingRight = 20;
 
+// let finaldata = [];
+// data.forEach((item, index) => {if (index === 0)
+// {finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales});return};
+// if (item.year!== finaldata[finaldata.length -1].year || item.month!== finaldata[finaldata.length -1].month)
+// {
+//    finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales })
+// }
+// else finaldata[finaldata.length - 1].sales += item.sales;
+// })
 
-var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
-xRenderer.labels.template.setAll({
-  rotation: -90,
-  centerY: am5.p50,
-  centerX: am5.p100,
-  paddingRight: 15
-});
+// console.log(data)
 
-var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-  maxDeviation: 0.3,
-  categoryField: "country",
-  renderer: xRenderer,
-  tooltip: am5.Tooltip.new(root, {})
-}));
-
-var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-  maxDeviation: 0.3,
-  renderer: am5xy.AxisRendererY.new(root, {})
-}));
-
-
-var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-  name: "Series 1",
-  xAxis: xAxis,
-  yAxis: yAxis,
-  valueYField: "value",
-  sequencedInterpolation: true,
-  categoryXField: "country",
-  tooltip: am5.Tooltip.new(root, {
-    labelText:"{valueY}"
-  })
-}));
-
-series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
-series.columns.template.adapters.add("fill", function(fill, target) {
-  return chart.get("colors").getIndex(series.columns.indexOf(target));
-});
-
-series.columns.template.adapters.add("stroke", function(stroke, target) {
-  return chart.get("colors").getIndex(series.columns.indexOf(target));
-});
-
-
-// Set data
-var data = [{
-  country: "USA",
-  value: 2025
-}, {
-  country: "China",
-  value: 1882
-}, {
-  country: "Japan",
-  value: 1809
-}, {
-  country: "Germany",
-  value: 1322
-}, {
-  country: "UK",
-  value: 1122
-}, {
-  country: "France",
-  value: 1114
-}, {
-  country: "India",
-  value: 984
-}, {
-  country: "Spain",
-  value: 711
-}, {
-  country: "Netherlands",
-  value: 665
-}, {
-  country: "South Korea",
-  value: 443
-}, {
-  country: "Canada",
-  value: 441
-}];
-
-xAxis.data.setAll(data);
-series.data.setAll(data);
-
-
-// Make stuff animate on load
-// https://www.amcharts.com/docs/v5/concepts/animations/
-series.appear(1000);
-chart.appear(1000, 100);
+// x.data = finaldata;
+// let dateAxis = x.xAxes.push(new am4charts.DateAxis());
+// dateAxis.renderer.grid.template.location = 0;
+// let valueAxis = x.yAxes.push(new am4charts.ValueAxis());
+// valueAxis.tooltip.disabled = true;
+// valueAxis.renderer.minWidth = 35;
+// let series = x.series.push(new am4charts.LineSeries());
+// series.dataFields.dateX = "date";
+// series.dataFields.valueY = "sales";
+// series.tooltipText = "{valueY.sales}";
+// x.cursor = new am4charts.XYCursor();
+// let scrollbarX = new am4charts.XYChartScrollbar();
+// scrollbarX.series.push(series);
+// x.scrollbarX = scrollbarX;
+// chart.current = x;
+// return () => {
+// x.dispose();
+//};
+}, []);
+  return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
 }
-//function Graph() {
-
-//}
-
-
 export default Graph
