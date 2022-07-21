@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import Graph from "./Components/Graph";
 const App = () => {
     const [data, setData] = useState([]);
@@ -7,7 +7,7 @@ const App = () => {
       let data = [];
       let response;
       fetch(
-          "http://127.0.0.1:8080/api/data/"
+          "http://127.0.0.1:8080/api/data/data.json"
         )
         .then((response) => {
           return response.json()
@@ -17,7 +17,7 @@ const App = () => {
           console.log(result)
         });
       },[])
-return <Graph data = {data}/>
+return <Graph data={data} />;
 }
 export default App;
 

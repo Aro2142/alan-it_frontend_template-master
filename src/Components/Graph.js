@@ -1,16 +1,16 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import React, {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 
 
 am4core.useTheme(am4themes_animated);
 
-const Graph = (props) =>{
+const Graph = ({data}) => {
 const chart = useRef(null);
     useEffect(() => {
-      console.log(props)
+      console.log(data)
        if (data.length === 0){
          return
        }
