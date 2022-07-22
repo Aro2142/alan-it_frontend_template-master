@@ -48,7 +48,7 @@ xRenderer.labels.template.setAll({
 
 var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
   maxDeviation: 0.3,
-  categoryField: "country",
+  categoryField: "year",
   renderer: xRenderer,
   tooltip: am5.Tooltip.new(root, {})
 }));
@@ -65,9 +65,9 @@ var series = chart.series.push(am5xy.ColumnSeries.new(root, {
   name: "Series 1",
   xAxis: xAxis,
   yAxis: yAxis,
-  valueYField: "value",
+  valueYField: "sales",
   sequencedInterpolation: true,
-  categoryXField: "country",
+  categoryXField: "year",
   tooltip: am5.Tooltip.new(root, {
     labelText:"{valueY}"
   })
@@ -83,44 +83,11 @@ series.columns.template.adapters.add("stroke", function(stroke, target) {
 });
 
 
-// Set data
-var data1 = [{
-  country: "USA",
-  value: 2025
-}, {
-  country: "China",
-  value: 1882
-}, {
-  country: "Japan",
-  value: 1809
-}, {
-  country: "Germany",
-  value: 1322
-}, {
-  country: "UK",
-  value: 1122
-}, {
-  country: "France",
-  value: 1114
-}, {
-  country: "India",
-  value: 984
-}, {
-  country: "Spain",
-  value: 711
-}, {
-  country: "Netherlands",
-  value: 665
-}, {
-  country: "South Korea",
-  value: 443
-}, {
-  country: "Canada",
-  value: 441
-}];
+// Set data###################################################################################
 
-xAxis.data.setAll(data1);
-series.data.setAll(data1);
+
+xAxis.data.setAll(data);
+series.data.setAll(data);
 
 
 // Make stuff animate on load
@@ -130,3 +97,4 @@ chart.appear(1000, 100);
 }, []);
 return <div id="chartdiv1" style={{ width: "100%", height: "500px" }}></div>;}
 export default Graph_two
+//
