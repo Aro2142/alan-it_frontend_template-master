@@ -5,13 +5,16 @@ import {useEffect, useRef} from 'react'
 
 
 
+
 am4core.useTheme(am4themes_animated);
+
 const Graph = ({data}) => {
 const chart = useRef(null);
     useEffect(() => {
       console.log(data)
-       if (data.length === 0){
-         return
+       if (data.length === 0)
+       {
+       return
        }
 
       
@@ -51,5 +54,4 @@ const chart = useRef(null);
 }, []);
   return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
 }
-//setTimeout(Graph, 4 * 1000);
 export default Graph
