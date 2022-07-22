@@ -1,57 +1,132 @@
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import {useEffect, useRef} from 'react'
+import { useLayoutEffect, useRef } from "react";
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 
-
-
-am4core.useTheme(am4themes_animated);
 
 const Graph_two = ({data}) => {
 const chart = useRef(null);
-    useEffect(() => {
+    useLayoutEffect(() => {
       console.log(data)
-       if (data.length === 0)
-       {
-       return
+       if (data.length === 0){
+         return
        }
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+var root = am5.Root.new("chartdiv1");
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
 
 
- let x = am4core.create("chartdiv1", am4charts.XYChart);
- x.paddingRight = 20;
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+  panX: true,
+  panY: true,
+  wheelX: "panX",
+  wheelY: "zoomX",
+  pinchZoomX:true
+}));
 
- let finaldata = [];
- data.forEach((item, index) => {if (index === 0)
- {finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales});return};
- if (item.year!== finaldata[finaldata.length -1].year || item.month!== finaldata[finaldata.length -1].month)
- {
-    finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales })
- }
- else finaldata[finaldata.length - 1].sales += item.sales;
- })
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+cursor.lineY.set("visible", false);
 
- //console.log(data)
 
- x.data = finaldata;
- let dateAxis = x.xAxes.push(new am4charts.DateAxis());
- dateAxis.renderer.grid.template.location = 0;
- let valueAxis = x.yAxes.push(new am4charts.ValueAxis());
- valueAxis.tooltip.disabled = true;
- valueAxis.renderer.minWidth = 35;
- let series = x.series.push(new am4charts.LineSeries());
- series.dataFields.dateX = "date";
- series.dataFields.valueY = "sales";
- series.tooltipText = "{valueY.sales}";
- x.cursor = new am4charts.XYCursor();
- let scrollbarX = new am4charts.XYChartScrollbar();
- scrollbarX.series.push(series);
- x.scrollbarX = scrollbarX;
- chart.current = x;
- return () => {
- x.dispose();
-};
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+xRenderer.labels.template.setAll({
+  rotation: -90,
+  centerY: am5.p50,
+  centerX: am5.p100,
+  paddingRight: 15
+});
+
+var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+  maxDeviation: 0.3,
+  categoryField: "country",
+  renderer: xRenderer,
+  tooltip: am5.Tooltip.new(root, {})
+}));
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+  maxDeviation: 0.3,
+  renderer: am5xy.AxisRendererY.new(root, {})
+}));
+
+
+// Create series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+  name: "Series 1",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value",
+  sequencedInterpolation: true,
+  categoryXField: "country",
+  tooltip: am5.Tooltip.new(root, {
+    labelText:"{valueY}"
+  })
+}));
+
+series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+series.columns.template.adapters.add("fill", function(fill, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+series.columns.template.adapters.add("stroke", function(stroke, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+
+// Set data
+var data1 = [{
+  country: "USA",
+  value: 2025
+}, {
+  country: "China",
+  value: 1882
+}, {
+  country: "Japan",
+  value: 1809
+}, {
+  country: "Germany",
+  value: 1322
+}, {
+  country: "UK",
+  value: 1122
+}, {
+  country: "France",
+  value: 1114
+}, {
+  country: "India",
+  value: 984
+}, {
+  country: "Spain",
+  value: 711
+}, {
+  country: "Netherlands",
+  value: 665
+}, {
+  country: "South Korea",
+  value: 443
+}, {
+  country: "Canada",
+  value: 441
+}];
+
+xAxis.data.setAll(data1);
+series.data.setAll(data1);
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear(1000);
+chart.appear(1000, 100);
 }, []);
-  return <div id="chartdiv1" style={{ width: "100%", height: "500px" }}></div>;
-}
+return <div id="chartdiv1" style={{ width: "100%", height: "500px" }}></div>;}
 export default Graph_two
