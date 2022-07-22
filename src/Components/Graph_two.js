@@ -12,6 +12,17 @@ const chart = useRef(null);
        if (data.length === 0){
          return
        }
+
+        let finaldata = [];
+ data.forEach((item, index) => {if (index === 0)
+ {finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales});return};
+ if (item.year!== finaldata[finaldata.length -1].year || item.month!== finaldata[finaldata.length -1].month)
+ {
+    finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales })
+ }
+ else finaldata[finaldata.length - 1].sales += item.sales;
+ })
+
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
 var root = am5.Root.new("chartdiv1");
@@ -86,8 +97,8 @@ series.columns.template.adapters.add("stroke", function(stroke, target) {
 // Set data###################################################################################
 
 
-xAxis.data.setAll(data);
-series.data.setAll(data);
+xAxis.data.setAll(finaldata);
+series.data.setAll(finaldata);
 
 
 // Make stuff animate on load
