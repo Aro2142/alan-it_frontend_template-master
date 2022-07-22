@@ -1,6 +1,9 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import Graph from "./Components/Graph";
+import Graph_two from "./Components/Graph_two";
+
+
 const App = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -13,7 +16,7 @@ const App = () => {
           console.log(result)
         });
       },[])
-return <Graph data={data} />;
+return [<Graph data={data}/>, <Graph_two data={data}/>];
 }
 export default App;
 
