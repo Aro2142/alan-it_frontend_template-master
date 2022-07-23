@@ -15,12 +15,12 @@ const chart = useRef(null);
 
         let finaldata = [];
  data.forEach((item, index) => {if (index === 0)
- {finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales});return};
+ {finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, profit: item.profit});return};
  if (item.year!== finaldata[finaldata.length -1].year || item.month!== finaldata[finaldata.length -1].month)
  {
-    finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, sales: item.sales })
+    finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, profit: item.profit })
  }
- else finaldata[finaldata.length - 1].sales += item.sales;
+ else finaldata[finaldata.length - 1].profit += item.profit;
  })
 
 // Set themes
@@ -76,7 +76,7 @@ var series = chart.series.push(am5xy.ColumnSeries.new(root, {
   name: "Series 1",
   xAxis: xAxis,
   yAxis: yAxis,
-  valueYField: "sales",
+  valueYField: "profit",
   sequencedInterpolation: true,
   categoryXField: "date",
   tooltip: am5.Tooltip.new(root, {
