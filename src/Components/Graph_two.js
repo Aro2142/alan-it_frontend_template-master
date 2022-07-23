@@ -59,7 +59,7 @@ xRenderer.labels.template.setAll({
 
 var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
   maxDeviation: 0.3,
-  categoryField: "year",
+  categoryField: "date",
   renderer: xRenderer,
   tooltip: am5.Tooltip.new(root, {})
 }));
@@ -78,7 +78,7 @@ var series = chart.series.push(am5xy.ColumnSeries.new(root, {
   yAxis: yAxis,
   valueYField: "sales",
   sequencedInterpolation: true,
-  categoryXField: "year",
+  categoryXField: "date",
   tooltip: am5.Tooltip.new(root, {
     labelText:"{valueY}"
   })
@@ -106,6 +106,5 @@ series.data.setAll(finaldata);
 series.appear(1000);
 chart.appear(1000, 100);
 }, []);
-return <div id="chartdiv1" style={{ width: "100%", height: "500px" }}></div>;}
+return <div id="chartdiv1" style={{ width: "100%", height: "500px", top: "0px",right: "0px",position: "absolute" }}></div>;}
 export default Graph_two
-//

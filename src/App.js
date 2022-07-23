@@ -16,7 +16,10 @@ const App = () => {
           console.log(result)
         });
       },[])
-return [<Graph data={data}/>, <Graph_two data={data}/>];
+return [
+//<Graph data={data}/>,
+<Graph_two data={data}/>
+];
 }
 export default App;
 

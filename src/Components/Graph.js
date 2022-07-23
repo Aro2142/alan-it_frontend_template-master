@@ -4,7 +4,6 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import {useEffect, useRef} from 'react'
 
 
-
 am4core.useTheme(am4themes_animated);
 const Graph = ({data}) => {
 const chart = useRef(null);
@@ -29,7 +28,6 @@ const chart = useRef(null);
  })
 
  //console.log(data)
-
  x.data = finaldata;
  let dateAxis = x.xAxes.push(new am4charts.DateAxis());
  dateAxis.renderer.grid.template.location = 0;
