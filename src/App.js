@@ -3,7 +3,12 @@ import React, {useState, useEffect} from 'react'
 import Tabs_R from "./Components/Tabs";
 //import Graph from "./Components/Graph";
 import Graph_two from "./Components/Graph_two";
-
+import Graph1 from "./Components/Graph1";
+import Graph2 from "./Components/Graph2";
+import Graph3 from "./Components/Graph3";
+import Graph4 from "./Components/Graph4";
+import Graph5 from "./Components/Graph5";
+import Graph6 from "./Components/Graph6";
 
 const App = () => {
     const [data, setData] = useState([]);
@@ -20,7 +25,13 @@ const App = () => {
 return [
 <Tabs_R />,
 //<Graph data={data}/>, This example, not use
-<Graph_two data={data}/>
+//<Graph_two data={data}/>,
+<Graph1 data = {data}/>,
+//<Graph2 data = {data}/>,
+//<Graph3 data = {data}/>,
+//<Graph4 data = {data}/>,
+//<Graph5 data = {data}/>,
+//<Graph6 data = {data}/>
 ];
 }
 export default App;

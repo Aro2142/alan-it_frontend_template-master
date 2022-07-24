@@ -54,16 +54,22 @@ function Tabs_R({transfer}) {
                                 <Tab label="Tutorial 1" value="1" />
                                 <Tab label="Tutorial 2" value="2" />
                                 <Tab label="Tutorial 3" value="3" />
+                                <Tab label="Tutorial 3" value="4" />
+                                <Tab label="Tutorial 3" value="5" />
+                                <Tab label="Tutorial 3" value="6" />
                             </TabList>
                         </Box>
-                        <TabPanel value="1">Data Structures</TabPanel>
-                        <TabPanel value="2">Algorithms</TabPanel>
-                        <TabPanel value="3"><div id="chartdiv1" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
+                        <TabPanel value="1"><div id="chartdiv12" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
+                        <TabPanel value="2"><div id="chartdiv1" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
+                        <TabPanel value="3"><div id="chartdiv2" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
+                        <TabPanel value="4"><div id="chartdiv3" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
+                        <TabPanel value="5"><div id="chartdiv4" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
+                        <TabPanel value="6"><div id="chartdiv5" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
                     </TabContext>
                 </Box>
             </div>
         </div>
     );
 }
-//
+
 export default Tabs_R
