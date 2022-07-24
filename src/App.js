@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
-import Graph from "./Components/Graph";
+import Tabs_R from "./Components/Tabs";
+//import Graph from "./Components/Graph";
 import Graph_two from "./Components/Graph_two";
 
 
@@ -17,8 +18,9 @@ const App = () => {
         });
       },[])
 return [
-//<Graph data={data}/>,
-<Graph_two data={data}/>
+<Tabs_R />,
+//<Graph data={data}/>, This example, not use
+//<Graph_two data={data}/> need transfer to tabs
 ];
 }
 export default App;

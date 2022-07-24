@@ -13,15 +13,36 @@ const chart = useRef(null);
          return
        }
 
-        let finaldata = [];
- data.forEach((item, index) => {if (index === 0)
- {finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, profit: item.profit});return};
- if (item.year!== finaldata[finaldata.length -1].year || item.month!== finaldata[finaldata.length -1].month)
- {
-    finaldata.push({date: item.year + "-" + item.month,year: item.year, month: item.month, profit: item.profit })
- }
- else finaldata[finaldata.length - 1].profit += item.profit;
- })
+        let finalData = [];
+data.forEach((item, index) => {
+      if (index === 0) {
+        finalData.push({
+          year: item.year,
+          sales: parseInt(item.sales),
+        });
+        return;
+      }
+        let found = false;
+        let pos = 0;
+        finalData.forEach((item2, index2)=>{
+        if(item2.year == item.year)
+        {
+            found = true;
+            pos = finalData.indexOf(item2)
+            return;
+        }
+        })
+        if (!found) {
+        finalData.push({
+          year: item.year,
+          sales: parseInt(item.sales),
+        });
+      } else
+      {
+        finalData[pos].sales += parseInt(item.sales);
+      }
+      });
+
 
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
@@ -59,7 +80,7 @@ xRenderer.labels.template.setAll({
 
 var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
   maxDeviation: 0.3,
-  categoryField: "date",
+  categoryField: "year",
   renderer: xRenderer,
   tooltip: am5.Tooltip.new(root, {})
 }));
@@ -76,9 +97,9 @@ var series = chart.series.push(am5xy.ColumnSeries.new(root, {
   name: "Series 1",
   xAxis: xAxis,
   yAxis: yAxis,
-  valueYField: "profit",
+  valueYField: "sales",
   sequencedInterpolation: true,
-  categoryXField: "date",
+  categoryXField: "year",
   tooltip: am5.Tooltip.new(root, {
     labelText:"{valueY}"
   })
@@ -97,8 +118,8 @@ series.columns.template.adapters.add("stroke", function(stroke, target) {
 // Set data###################################################################################
 
 
-xAxis.data.setAll(finaldata);
-series.data.setAll(finaldata);
+xAxis.data.setAll(finalData);
+series.data.setAll(finalData);
 
 
 // Make stuff animate on load
