@@ -20,7 +20,7 @@ const App = () => {
 return [
 <Tabs_R />,
 //<Graph data={data}/>, This example, not use
-//<Graph_two data={data}/> need transfer to tabs
+<Graph_two data={data}/>
 ];
 }
 export default App;

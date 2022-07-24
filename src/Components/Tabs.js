@@ -58,7 +58,7 @@ function Tabs_R({transfer}) {
                         </Box>
                         <TabPanel value="1">Data Structures</TabPanel>
                         <TabPanel value="2">Algorithms</TabPanel>
-                        <TabPanel value="3">{transfer}</TabPanel>
+                        <TabPanel value="3"><div id="chartdiv1" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
                     </TabContext>
                 </Box>
             </div>

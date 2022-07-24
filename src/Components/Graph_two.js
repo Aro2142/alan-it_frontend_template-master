@@ -127,5 +127,8 @@ series.data.setAll(finalData);
 series.appear(1000);
 chart.appear(1000, 100);
 }, []);
-return <div id="chartdiv1" style={{ width: "100%", height: "500px", top: "0px",right: "0px",position: "absolute" }}></div>;}
+return [
+]
+
+;}
 export default Graph_two
