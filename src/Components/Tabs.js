@@ -28,7 +28,7 @@ function Tabs_R({transfer}) {
                         color: "green",
                     }}
                 >
-                    GeeksforGeeks
+                    Худшая работа года
                 </h1>
             </div>
             <div
@@ -51,12 +51,12 @@ function Tabs_R({transfer}) {
                     <TabContext value={value}>
                         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                             <TabList onChange={handleChange}>
-                                <Tab label="Tutorial 1" value="1" />
-                                <Tab label="Tutorial 2" value="2" />
-                                <Tab label="Tutorial 3" value="3" />
-                                <Tab label="Tutorial 3" value="4" />
-                                <Tab label="Tutorial 3" value="5" />
-                                <Tab label="Tutorial 3" value="6" />
+                                <Tab label="Граф 1" value="1" />
+                                <Tab label="Граф 2" value="2" />
+                                <Tab label="Граф 3" value="3" />
+                                <Tab label="Граф 4" value="4" />
+                                <Tab label="Граф 5" value="5" />
+                                <Tab label="Граф 6" value="6" />
                             </TabList>
                         </Box>
                         <TabPanel value="1"><div id="chartdiv12" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
