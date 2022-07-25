@@ -25,8 +25,8 @@ const App = () => {
 return [
 <Tabs_R />,
 //<Graph data={data}/>, This example, not use
-//<Graph_two data={data}/>,
-<Graph1 data = {data}/>,
+<Graph_two data={data}/>,
+//<Graph1 data = {data}/>,
 //<Graph2 data = {data}/>,
 //<Graph3 data = {data}/>,
 //<Graph4 data = {data}/>,
@@ -34,7 +34,7 @@ return [
 //<Graph6 data = {data}/>
 ];
 }
-//Графы закоментированны, потому что на моем слабом пк все сыпают ошибки, по отдельности нет
+//Графы закоментированны, потому что на моем слабом пк все сыпают ошибки, по отдельности нет, на хорошем железе все должно быть ок
 export default App;
 
 

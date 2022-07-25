@@ -43,7 +43,7 @@ data.forEach((item, index) => {
       }
       });
 
-//
+
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
 var root = am5.Root.new("chartdiv12");

@@ -37,7 +37,7 @@ function Tabs_R({transfer}) {
                     margin: "auto",
                 }}
             >
-                <strong>React MUI Tab API</strong>
+                <strong>"Made The China cats"</strong>
             </div>
             <br />
             <div
@@ -51,12 +51,12 @@ function Tabs_R({transfer}) {
                     <TabContext value={value}>
                         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                             <TabList onChange={handleChange}>
-                                <Tab label="Граф 1" value="1" />
+                                <Tab label="Продажи за год" value="1" />
                                 <Tab label="Граф 2" value="2" />
-                                <Tab label="Граф 3" value="3" />
-                                <Tab label="Граф 4" value="4" />
-                                <Tab label="Граф 5" value="5" />
-                                <Tab label="Граф 6" value="6" />
+                                <Tab label="Выручка по сегментам" value="3" />
+                                <Tab label="Продажи по региону" value="4" />
+                                <Tab label="Выручка по типам продукции" value="5" />
+                                <Tab label="Выручка по видам услуг" value="6" />
                             </TabList>
                         </Box>
                         <TabPanel value="1"><div id="chartdiv12" style={{ width: "100%", height: "500px", top: "200px",right: "0px",position: "absolute" }}></div></TabPanel>
