@@ -1,31 +1,31 @@
-import React, { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import * as am5percent from "@amcharts/amcharts5/percent";
-const Graph3 = ({data}) => {
-  const chart = useRef(null);
-
-  useLayoutEffect(() => {
 
 
-  if (data.length === 0){
+//
+const Graph_two = ({data}) => {
+const chart = useRef(null);
+    useLayoutEffect(() => {
+      console.log(data)
+       if (data.length === 0){
          return
        }
-var root = am5.Root.new("chartdiv5");
-    let finalData = [];
-     data.forEach((item, index) => {
+
+        let finalData = [];
+data.forEach((item, index) => {
       if (index === 0) {
         finalData.push({
-          service: item.service,
-          profit: parseInt(item.profit),
+          year: item.year,
+          sales: parseInt(item.sales),
         });
         return;
       }
         let found = false;
         let pos = 0;
         finalData.forEach((item2, index2)=>{
-        if(item2.service == item.service)
+        if(item2.year == item.year)
         {
             found = true;
             pos = finalData.indexOf(item2)
@@ -34,66 +34,101 @@ var root = am5.Root.new("chartdiv5");
         })
         if (!found) {
         finalData.push({
-          service: item.service,
-          profit: parseInt(item.profit),
+          year: item.year,
+          sales: parseInt(item.sales),
         });
       } else
       {
-        finalData[pos].profit += parseInt(item.profit);
+        finalData[pos].sales += parseInt(item.sales);
       }
       });
-        root.data = finalData;
+
+
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
+var root = am5.Root.new("chartdiv12");
 root.setThemes([
   am5themes_Animated.new(root)
 ]);
 
+
 // Create chart
-// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-// start and end angle must be set both for chart and series
-var chart = root.container.children.push(am5percent.PieChart.new(root, {
-  startAngle: 180,
-  endAngle: 360,
-  layout: root.verticalLayout,
-  innerRadius: am5.percent(50)
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+  panX: true,
+  panY: true,
+  wheelX: "panX",
+  wheelY: "zoomX",
+  pinchZoomX:true
 }));
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+cursor.lineY.set("visible", false);
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+xRenderer.labels.template.setAll({
+  rotation: -90,
+  centerY: am5.p50,
+  centerX: am5.p100,
+  paddingRight: 15
+});
+
+var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+  maxDeviation: 0.3,
+  categoryField: "year",
+  renderer: xRenderer,
+  tooltip: am5.Tooltip.new(root, {})
+}));
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+  maxDeviation: 0.3,
+  renderer: am5xy.AxisRendererY.new(root, {})
+}));
+
 
 // Create series
-// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-// start and end angle must be set both for chart and series
-var series = chart.series.push(am5percent.PieSeries.new(root, {
-  startAngle: 180,
-  endAngle: 360,
-  valueField: "profit",
-  categoryField: "service",
-  alignLabels: false
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+  name: "Series 1",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "sales",
+  sequencedInterpolation: true,
+  categoryXField: "year",
+  tooltip: am5.Tooltip.new(root, {
+    labelText:"{valueY}"
+  })
 }));
 
-series.states.create("hidden", {
-  startAngle: 180,
-  endAngle: 180
+series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+series.columns.template.adapters.add("fill", function(fill, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
 });
 
-series.slices.template.setAll({
-  cornerRadius: 5
+series.columns.template.adapters.add("stroke", function(stroke, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
 });
 
-series.ticks.template.setAll({
-  forceHidden: true
-});
 
-// Set data
-// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+// Set data###################################################################################
+
+
+xAxis.data.setAll(finalData);
 series.data.setAll(finalData);
 
-    return () => {
-    };
-  }, [data]);
 
-  return [
-  //<div id="chartdiv5" style={{width: "50%", height: "300px", top: "450px",right: "-110px", position: "absolute"}} />,
-   //<p style={{width: "50%", height: "0px", top: "290px",right: "-350px", position: "relative"}}>Диаграмма зависимости года и выручки </p>
-   ];
-};
-export default Graph3;
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear(1000);
+chart.appear(1000, 100);
+}, []);
+return [
+]
+
+;}
+export default Graph_two

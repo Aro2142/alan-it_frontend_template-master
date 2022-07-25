@@ -4,7 +4,7 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 
-
+//
 const Graph_two = ({data}) => {
 const chart = useRef(null);
     useLayoutEffect(() => {
@@ -59,20 +59,22 @@ var chart = root.container.children.push(am5xy.XYChart.new(root, {
   panY: true,
   wheelX: "panX",
   wheelY: "zoomX",
-  pinchZoomX:true
+  pinchZoomX:true,
+  fill: am5.color(0xADFF2F)
 }));
-
+//
 // Add cursor
 // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
 var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
 cursor.lineY.set("visible", false);
+cursor.lineX.set("visible", false);
 
-
+//
 // Create axes
 // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
 var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
 xRenderer.labels.template.setAll({
-  rotation: -90,
+  rotation: -45,
   centerY: am5.p50,
   centerX: am5.p100,
   paddingRight: 15
@@ -84,13 +86,12 @@ var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
   renderer: xRenderer,
   tooltip: am5.Tooltip.new(root, {})
 }));
-
+//
 var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
   maxDeviation: 0.3,
   renderer: am5xy.AxisRendererY.new(root, {})
 }));
-
-
+//
 // Create series
 // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
 var series = chart.series.push(am5xy.ColumnSeries.new(root, {
@@ -104,8 +105,15 @@ var series = chart.series.push(am5xy.ColumnSeries.new(root, {
     labelText:"{valueY}"
   })
 }));
-
-series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+chart.get("colors").set("colors", [
+  am5.color(0x095256),
+  am5.color(0x087f8c),
+  am5.color(0x5aaa95),
+  am5.color(0x86a873),
+  am5.color(0xbb9f06)
+]);
+//
+series.columns.template.setAll({ cornerRadiusTL: 500, cornerRadiusTR: 500 });
 series.columns.template.adapters.add("fill", function(fill, target) {
   return chart.get("colors").getIndex(series.columns.indexOf(target));
 });
@@ -124,11 +132,11 @@ series.data.setAll(finalData);
 
 // Make stuff animate on load
 // https://www.amcharts.com/docs/v5/concepts/animations/
-series.appear(1000);
+series.appear(2000);
 chart.appear(1000, 100);
 }, []);
 return [
 ]
-
+//
 ;}
 export default Graph_two

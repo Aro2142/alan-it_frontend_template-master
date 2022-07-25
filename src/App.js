@@ -8,7 +8,7 @@ import Graph2 from "./Components/Graph2";
 import Graph3 from "./Components/Graph3";
 import Graph4 from "./Components/Graph4";
 import Graph5 from "./Components/Graph5";
-import Graph6 from "./Components/Graph6";
+//import Graph6 from "./Components/Graph6";
 
 const App = () => {
     const [data, setData] = useState([]);
